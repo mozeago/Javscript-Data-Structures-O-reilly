@@ -4,9 +4,6 @@ class Node {
     this.left = null;
     this.right = null;
   }
-  show() {
-    return this.value;
-  }
 }
 class BinarySearchTree {
   constructor() {
@@ -25,7 +22,7 @@ class BinarySearchTree {
   }
   insertNode(root, newNode) {
     // we are creating this separate method because we want to
-    // use recursion on the insert method
+    // use recursion on the insert(value) method
     if (newNode.value < root.value) {
       if (root.left === null) {
         root.left = newNode;
@@ -40,7 +37,23 @@ class BinarySearchTree {
       }
     }
   }
+  search(root, value) {
+    if (!root) {
+      return false;
+    }
+    if (root.value === value) {
+      return true;
+    } else if (value < root.value) {
+      return this.search(root.left, value);
+    } else {
+      return this.search(root.right, value);
+    }
+  }
 }
 
 const bst = new BinarySearchTree();
 console.log('BST is empty:', bst.isEmpty());
+bst.insert(10);
+bst.insert(5);
+bst.insert(15);
+console.log(bst.search(bst.root, 5));
