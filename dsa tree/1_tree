@@ -70,6 +70,30 @@ class BinarySearchTree {
       this.inOrder(root.right);
     }
   }
+  min(root) {
+    if (!root.left) {
+      return root.value;
+    } else {
+      return this.min(root.left);
+    }
+  }
+  max(root) {
+    if (!root.right) {
+      return root.value;
+    } else {
+      return this.max(root.right);
+    }
+  }
+  levelOrder(root) {
+    // Breadth first search
+    const queue = [root];
+    while (queue.length) {
+      let currentValue = queue.shift();
+      console.log(currentValue.value);
+      if (currentValue.left) queue.push(currentValue.left);
+      if (currentValue.right) queue.push(currentValue.right);
+    }
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -87,3 +111,9 @@ console.log('POST--- ORDER');
 bst.postOrder(bst.root);
 console.log('IN--- ORDER');
 bst.inOrder(bst.root);
+console.log('----- BFS------');
+bst.levelOrder(bst.root);
+console.log('----- MIN------');
+console.log(bst.min(bst.root));
+console.log('----- MAX------');
+console.log(bst.max(bst.root));
